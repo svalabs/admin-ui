@@ -16,5 +16,5 @@ export class ScheduledEvent {
     access_code: string;
     disable_restriction: boolean;
     on_demand: boolean;
-    one_time_access_code: boolean;
+    one_time_access_code: string;
 }

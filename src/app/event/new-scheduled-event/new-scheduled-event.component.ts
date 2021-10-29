@@ -87,7 +87,9 @@ export class NewScheduledEventComponent implements OnInit {
       Validators.pattern(/^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$/),
       this.uniqueAccessCode()
     ]),
-    'one_time_access_code': new FormControl(false),
+    'one_time_access_code': new FormControl(this.se.one_time_access_code, [
+      Validators.maxLength(2),
+    ]),
     'restricted_bind': new FormControl(true),
     'on_demand': new FormControl(false)
   })
