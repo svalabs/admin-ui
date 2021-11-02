@@ -43,6 +43,7 @@ import { AlertComponent } from './alert/alert.component';
 import { VmtemplatesComponent } from './configuration/vmtemplates/vmtemplates.component';
 import { EditVmtemplateComponent } from './configuration/vmtemplates/edit-vmtemplate/edit-vmtemplate.component';
 import { AppConfigService } from './app-config.service';
+import { OneTimeAccessCodeComponent } from './event/one-time-access-code/one-time-access-code.component';
 
 const appInitializerFn = (appConfig: AppConfigService) => {
   return () => {
@@ -93,7 +94,8 @@ export function jwtOptionsFactory() {
     AlertComponent,
     PrintableComponent,
     VmtemplatesComponent,
-    EditVmtemplateComponent
+    EditVmtemplateComponent,
+    OneTimeAccessCodeComponent
   ],
   imports: [
     BrowserModule,

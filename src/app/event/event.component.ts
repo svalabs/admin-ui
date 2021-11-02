@@ -3,6 +3,7 @@ import { ScheduledEvent } from 'src/app/data/scheduledevent';
 import { ScheduledeventService } from 'src/app/data/scheduledevent.service';
 import { NewScheduledEventComponent } from './new-scheduled-event/new-scheduled-event.component';
 import { ClrModal, ClrDatagridSortOrder } from '@clr/angular';
+import { OneTimeAccessCodeComponent } from './one-time-access-code/one-time-access-code.component';
 
 @Component({
   selector: 'app-event',
@@ -33,6 +34,7 @@ export class EventComponent implements OnInit {
 
   @ViewChild("wizard", { static: true }) wizard: NewScheduledEventComponent;
   @ViewChild("deletemodal", { static: true }) deletemodal: ClrModal;
+  @ViewChild("wizrad", {static: true}) wizardOTAC: OneTimeAccessCodeComponent;
 
   ngOnInit() {
     this.refresh();
@@ -73,6 +75,11 @@ export class EventComponent implements OnInit {
   public openEdit(se: ScheduledEvent) {
     this.editingEvent = se;
     this.wizard.open();
+  }
+
+  public openOneTimeAccessCodes(se: ScheduledEvent){
+    this.editingEvent = se;
+    /* this.wizardOTAC.open(); */
   }
 
   public refresh() {

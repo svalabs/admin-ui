@@ -1,0 +1,18 @@
+<clr-wizard #wizard [(clrWizardOpen)]="wzOpen" clrWizardSize="xl" (clrWizardOnFinish)="save()">
+    <clr-wizard-title>Generate One Time Access Codes</clr-wizard-title>
+  
+    <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+    <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+  
+    <clr-wizard-page (clrWizardPageOnCommit)="copyEventDetails()">
+      <ng-template clrPageTitle>Generate Access Codes</ng-template>
+      <form clrForm [formGroup]="eventDetails">
+        <clr-toggle-container>
+          <clr-toggle-wrapper>
+            <input type="checkbox" clrToggle name="generate_one_time_access_codes" formControlName="generate_one_time_access_codes">
+            <label>Generate One Time Access Codes</label>
+          </clr-toggle-wrapper>
+          <clr-control-helper>To generate one time only access codes.</clr-control-helper>
+        </clr-toggle-container>
+      </form>
+    </clr-wizard-page>  
