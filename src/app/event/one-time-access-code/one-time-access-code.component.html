@@ -4,7 +4,7 @@
     <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
     <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
   
-    <clr-wizard-page (clrWizardPageOnCommit)="copyEventDetails()">
+    <clr-wizard-page >
       <ng-template clrPageTitle>Generate Access Codes</ng-template>
       <form clrForm [formGroup]="eventDetails">
         <clr-toggle-container>
@@ -16,3 +16,4 @@
         </clr-toggle-container>
       </form>
     </clr-wizard-page>  
+</clr-wizard>

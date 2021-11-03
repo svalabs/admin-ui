@@ -104,7 +104,9 @@ export class NewScheduledEventComponent implements OnInit {
     this.se.event_name = this.eventDetails.get('event_name').value;
     this.se.description = this.eventDetails.get('description').value;
     this.se.access_code = this.eventDetails.get('access_code').value;
-    this.se.one_time_access_code = this.eventDetails.get('one_time_access_code').value;
+    if (this.eventDetails.get('one_time_access_code').value != "") {
+      this.se.one_time_access_code = this.eventDetails.get('one_time_access_code').value;
+    }
     this.se.disable_restriction = !this.eventDetails.get("restricted_bind").value; // opposite, since restricted_bind: enabled really means disable_restriction: false
     this.se.on_demand = this.eventDetails.get("on_demand").value;
   }
