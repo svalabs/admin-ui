@@ -17,6 +17,7 @@ export class EventComponent implements OnInit {
   public deleteopen: boolean = false;
 
   public deletingevent: ScheduledEvent = new ScheduledEvent();
+  public oneTimeAccessCodesEvent: ScheduledEvent;
 
   public seSuccessAlert: string = "";
   public seDangerAlert: string = "";
@@ -78,8 +79,8 @@ export class EventComponent implements OnInit {
     this.wizard.open();
   }
 
-  public openOneTimeAccessCodes(se: ScheduledEvent){
-    this.editingEvent = se;
+  public openOTAC(se: ScheduledEvent){
+    this.oneTimeAccessCodesEvent = se;
     this.wizardOTAC.open();
   }
 

@@ -133,6 +133,7 @@ export class NewScheduledEventComponent implements OnInit {
     )
     this.selectedscenarios = s;
   }
+  
   public coursesSelected(c: Course[]) {
     this.se.courses = [];
     c.forEach(
