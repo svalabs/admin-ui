@@ -34,8 +34,8 @@ export class EventComponent implements OnInit {
 
   }
 
+  @ViewChild("otac", {static: true}) otac: OneTimeAccessCodeComponent;
   @ViewChild("wizard", { static: true }) wizard: NewScheduledEventComponent;
-  @ViewChild("wizardOTAC", {static: true}) wizardOTAC: OneTimeAccessCodeComponent;
   @ViewChild("deletemodal", { static: true }) deletemodal: ClrModal;
   
   ngOnInit() {
@@ -81,7 +81,7 @@ export class EventComponent implements OnInit {
 
   public openOTAC(se: ScheduledEvent){
     this.oneTimeAccessCodesEvent = se;
-    this.wizardOTAC.open();
+    this.otac.open();
   }
 
   public refresh() {

@@ -23,7 +23,7 @@ export class OneTimeAccessCodeComponent implements OnInit {
     public ses: ScheduledeventService
   ) { }
 
-  @ViewChild("wizardOTAC", {static:true}) wizardOTAC: ClrWizard;
+  @ViewChild("otac", {static:true}) otac: ClrWizard;
 
   ngOnInit() {
     if (this.event){
@@ -42,7 +42,7 @@ export class OneTimeAccessCodeComponent implements OnInit {
     this.eventDetails.reset({
       "generate_one_time_access_code": false,
     })
-    this.wizardOTAC.open();
+    this.otac.open();
   }
 
   public save() { 
