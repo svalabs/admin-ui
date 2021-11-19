@@ -71,7 +71,7 @@
       </div>
 
       <new-scheduled-event #wizard (updated)="newupdated()" [event]="editingEvent"></new-scheduled-event>
-      <one-time-access-code #otac (updated)="newupdated()" [event]="editingEvent"></one-time-access-code>
+      <app-one-time-access-code #otacWz [event]="editingEvent"></app-one-time-access-code>
 
       <clr-modal #deletemodal [(clrModalOpen)]="deleteopen">
         <h3 class="modal-title">Confirm Delete</h3>

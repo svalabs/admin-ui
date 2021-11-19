@@ -1,11 +1,13 @@
-<clr-wizard #otac [(clrWizardOpen)]="wzOpen" clrWizardSize="xl" (clrWizardOnFinish)="save()">
+<clr-wizard (clrWizardOnFinish)="save()">
     <clr-wizard-title>Generate One Time Access Codes</clr-wizard-title>
   
     <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+    <clr-wizard-button [type]="'previous'">Previous</clr-wizard-button>
+    <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
     <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
   
-    <clr-wizard-page >
-      <ng-template clrPageTitle>Generate Access Codes</ng-template>
+    <clr-wizard-page>
+      <ng-template clrPageTitle>Event Details</ng-template>
       <form clrForm [formGroup]="eventDetails">
         <clr-toggle-container>
           <clr-toggle-wrapper>
@@ -15,5 +17,5 @@
           <clr-control-helper>To generate one time only access codes.</clr-control-helper>
         </clr-toggle-container>
       </form>
-    </clr-wizard-page>  
+    </clr-wizard-page>
 </clr-wizard>

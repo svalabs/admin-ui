@@ -14,23 +14,17 @@ export class OneTimeAccessCodeComponent implements OnInit {
   @Input()
   public ac: OneTimeAccessCode;
 
+  @Input()
   public event: ScheduledEvent;
-  public se: ScheduledEvent = new ScheduledEvent();
+
   public wzOpen: boolean = false;
 
-  constructor(
-    private _fb: FormBuilder,
-    public ses: ScheduledeventService
-  ) { }
+  constructor() { }
 
-  @ViewChild("otac", {static:true}) otac: ClrWizard;
+  @ViewChild(ClrWizard, {static: true}) otacWz: ClrWizard;
 
   ngOnInit() {
-    if (this.event){
-      this.se = this.event;
-    } else {
-      this.se = new ScheduledEvent();
-    }
+
   }
 
   public eventDetails: FormGroup = new FormGroup({
@@ -38,15 +32,11 @@ export class OneTimeAccessCodeComponent implements OnInit {
   });
 
   public open() { 
-    this.ac = new OneTimeAccessCode();
-    this.eventDetails.reset({
-      "generate_one_time_access_code": false,
-    })
-    this.otac.open();
+    this.otacWz.open()
   }
 
   public save() { 
-    console.log("done")
-   }
+    
+  }
 
 }

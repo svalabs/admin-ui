@@ -4,7 +4,6 @@ import { ScheduledeventService } from 'src/app/data/scheduledevent.service';
 import { NewScheduledEventComponent } from './new-scheduled-event/new-scheduled-event.component';
 import { ClrModal, ClrDatagridSortOrder } from '@clr/angular';
 import { OneTimeAccessCodeComponent } from './one-time-access-code/one-time-access-code.component';
-import { OneTimeAccessCode } from '../data/onetimeaccesscode';
 
 @Component({
   selector: 'app-event',
@@ -34,7 +33,7 @@ export class EventComponent implements OnInit {
 
   }
 
-  @ViewChild("otac", {static: true}) otac: OneTimeAccessCodeComponent;
+  @ViewChild("otacWz", {static: true}) otacWz: OneTimeAccessCodeComponent;
   @ViewChild("wizard", { static: true }) wizard: NewScheduledEventComponent;
   @ViewChild("deletemodal", { static: true }) deletemodal: ClrModal;
   
@@ -81,7 +80,7 @@ export class EventComponent implements OnInit {
 
   public openOTAC(se: ScheduledEvent){
     this.oneTimeAccessCodesEvent = se;
-    this.otac.open();
+    this.otacWz.open();
   }
 
   public refresh() {
