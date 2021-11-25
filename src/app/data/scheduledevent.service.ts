@@ -42,7 +42,7 @@ export class ScheduledeventService {
       .set("access_code", se.access_code.toLowerCase()) // this needs to be lower case because of RFC-1123
       .set("disable_restriction", JSON.stringify(se.disable_restriction))
       .set("on_demand", JSON.stringify(se.on_demand))
-      .set("one_time_access_code", se.one_time_access_code);
+      
 
       if (se.scenarios != null) {
          params = params.set("scenarios", JSON.stringify(se.scenarios))

@@ -3,4 +3,5 @@ export class OneTimeAccessCode {
     code: string;
     access_code_identifer: string;
     timestamp: Date;
+    quantity: number;
 }

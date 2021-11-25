@@ -37,11 +37,6 @@
         </clr-control-error>
         <clr-control-error *clrIfError="'notUnqiue'">Access code is already in use</clr-control-error>
       </clr-input-container>
-      <clr-input-container>
-        <label>One Time Access Code</label>
-        <input clrInput type="text" placeholder="One Time Access Codes" name="one_time_access_code" formControlName="one_time_access_code"/>
-        <clr-control-error *clrIfError="'maxlength'">No more as 2 digit number</clr-control-error>
-      </clr-input-container>
       <clr-toggle-container>
         <clr-toggle-wrapper>
           <input type="checkbox" clrToggle name="restricted_bind" formControlName="restricted_bind">
