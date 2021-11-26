@@ -1,4 +1,4 @@
-<clr-wizard (clrWizardOnFinish)="save()">
+<clr-wizard (clrWizardOnFinish)="save()" (clrWizardOnNext)="createOtac()">
     <clr-wizard-title>Generate One Time Access Codes</clr-wizard-title>
   
     <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
@@ -6,24 +6,27 @@
     <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
     <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
   
-    <clr-wizard-page>
+    <clr-wizard-page [clrWizardPageNextDisabled]="!checked" >
       <ng-template clrPageTitle>Event Details</ng-template>
-      <form clrForm [formGroup]="eventDetails">
+      <form clrForm [formGroup]="eventDetails" >
         <clr-input-container>
           <label>One Time Access Code</label>
-          <input clrInput type="text" placeholder="One Time Access Codes" name="quantity" formControlName="quantity"/>
-          <clr-control-error *clrIfError="'maxlength'">No more as 2 digit number</clr-control-error>
+          <input clrInput type="number" placeholder="One Time Access Codes" name="quantity" formControlName="quantity"/>
+          <clr-control-error *clrIfError="'maxlength'">No more than a 2 digit number</clr-control-error>
+          <clr-control-helper>Please enter the quantity of one time access codes which should be generated</clr-control-helper>
         </clr-input-container>
         <clr-toggle-container>
           <clr-toggle-wrapper>
-            <input type="checkbox" clrToggle name="generate_one_time_access_codes" formControlName="generate_one_time_access_codes">
+            <input type="checkbox" clrToggle name="generate_one_time_access_codes" formControlName="generate_one_time_access_codes" [(ngModel)]="checked">
             <label>Generate One Time Access Codes</label>
           </clr-toggle-wrapper>
           <clr-control-helper>To generate one time only access codes.</clr-control-helper>
         </clr-toggle-container>
       </form>
+      <button class="action-item" (click)="createOtac()">One Time Access Codes</button>
     </clr-wizard-page>
-    <clr-wizard-page [clrWizardPageNextDisabled]="otacs.length == 0">
+
+    <clr-wizard-page (clrWizardPageOnLoad)="retrieveList()">
       <ng-template clrPageTitle>Generated One Time Access Codes</ng-template>
       <clr-datagrid [clrDgSelected]="otacs">
         <clr-dg-row *clrDgItems="let o of otacs" [clrDgItem]="o">

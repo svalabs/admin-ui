@@ -15,8 +15,8 @@ export class OnetimeaccesscodeService {
 
   constructor(public http: HttpClient) { }
 
-  public list() {
-    return this.http.get(environment.server+ "/a/scheduledevent/list")
+  public list(accessCode: string) {
+    return this.http.get(environment.server+ "/a/scheduledevent/list/" + accessCode + "/otac")
       .pipe(
         switchMap((response: ServerResponse) => {
           return from(JSON.parse(atou(response.content)))
@@ -32,8 +32,9 @@ export class OnetimeaccesscodeService {
       )
   }
 
+  // might delete the get methode, because at current state isn't needed
   public get(accessCode: string) {
-    return this.http.get(environment.server + "/a/scheduledevent/" + accessCode)
+    return this.http.get(environment.server + "/a/scheduledevent/" + accessCode + "/otac")
       .pipe(
         switchMap((response: ServerResponse) => {
           let se = JSON.parse(atou(response.content));
