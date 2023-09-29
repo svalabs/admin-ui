@@ -45,7 +45,8 @@
               "node_modules/prismjs/components/prism-go.min.js",
               "node_modules/prismjs/components/prism-docker.min.js",
               "node_modules/prismjs/components/prism-json.min.js",
-              "node_modules/prismjs/components/prism-markdown.min.js"
+              "node_modules/prismjs/components/prism-markdown.min.js",
+              "node_modules/marked/marked.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -145,5 +146,13 @@
     "schematicCollections": [
       "@angular-eslint/schematics"
     ]
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
   }
 }
