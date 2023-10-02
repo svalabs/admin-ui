@@ -20,6 +20,7 @@ import { HostListener } from '@angular/core';
 import { interval, Subscription, timer } from 'rxjs';
 import { themes } from '../terminal-themes/themes';
 import { SettingsService } from '../../data/settings.service';
+import { CanvasAddon } from 'xterm-addon-canvas';
 
 const WS_CODE_NORMAL_CLOSURE = 1000;
 
@@ -104,8 +105,12 @@ export class TerminalComponent implements OnChanges, AfterViewInit, OnDestroy {
       fontFamily: 'monospace',
       fontSize: 16,
       letterSpacing: 1.1,
-      rendererType: isFirefox ? 'dom' : 'canvas',
     });
+    if (!isFirefox) {
+      // The default renderer is the dom renderer
+      // Use the more performant canvas renderer if the current browser is not Firefox
+      this.term.loadAddon(new CanvasAddon());
+    }
     this.settingsService.settings$.subscribe(({ terminal_theme }) => {
       this.setTerminalTheme(terminal_theme);
     });
@@ -260,6 +265,6 @@ export class TerminalComponent implements OnChanges, AfterViewInit, OnDestroy {
   private setTerminalTheme(themeId: string) {
     if (!this.term) return;
     const theme = themes.find((t) => t.id === themeId) || themes[0];
-    this.term.setOption('theme', theme.styles);
+    this.term.options.theme = theme.styles;
   }
 }
