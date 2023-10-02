@@ -4,14 +4,13 @@
       <div class="card" id="sidebar">
         <div class="card-header">
           <h4 class="scenario-info bold">{{ scenario.name }}</h4>
-          <section class="scenario-info" *ngIf="!!session.course">Course: {{ courseName  }}</section>
+          <section class="scenario-info" *ngIf="!!session.course">
+            Course: {{ courseName }}
+          </section>
           <section class="scenario-info">User: {{ username }}</section>
 
-          <button
-            class="btn btn-next btn-warning-outline"
-            (click)="goFinish()"
-          >
-            <clr-icon shape="check"></clr-icon>
+          <button class="btn btn-next btn-warning-outline" (click)="goFinish()">
+            <cds-icon shape="check"></cds-icon>
             Terminate Session
           </button>
         </div>
@@ -40,7 +39,7 @@
               (click)="goPrevious()"
               [disabled]="this.stepnumber < 1"
             >
-              <clr-icon shape="arrow" dir="left"></clr-icon> Prev
+              <cds-icon shape="arrow" direction="left"></cds-icon> Prev
             </button>
             <span id="step-counter">
               {{ this.stepnumber + 1 }}/{{ this.scenario.stepcount }}
@@ -50,14 +49,14 @@
               *ngIf="!isLastStepActive"
               (click)="goNext()"
             >
-              Next <clr-icon shape="arrow" dir="right"></clr-icon>
+              Next <cds-icon shape="arrow" direction="right"></cds-icon>
             </button>
             <button
               class="btn btn-success btn-next"
               (click)="goFinish()"
               *ngIf="isLastStepActive"
             >
-              <clr-icon shape="check"></clr-icon> Finish
+              <cds-icon shape="check"></cds-icon> Finish
             </button>
           </div>
         </div>
@@ -68,7 +67,7 @@
         <clr-tabs>
           <clr-tab *ngFor="let v of vms | keyvalue" #tab>
             <button clrTabLink [id]="v.key">
-              <clr-icon size="24" shape="host"></clr-icon> {{ v.key }}
+              <cds-icon size="24" shape="host"></cds-icon> {{ v.key }}
             </button>
             <clr-tab-content #tabcontent>
               <table class="table compact">
@@ -86,7 +85,13 @@
                 [endpoint]="v.value.ws_endpoint"
                 #term
               ></app-terminal>
-              <h3 class="guac-terminal" *ngIf="isGuacamoleTerminal(v.value.protocol)">Admin access to terminals only possible on machines that support ssh-connections</h3>
+              <h3
+                class="guac-terminal"
+                *ngIf="isGuacamoleTerminal(v.value.protocol)"
+              >
+                Admin access to terminals only possible on machines that support
+                ssh-connections
+              </h3>
             </clr-tab-content>
           </clr-tab>
         </clr-tabs>
@@ -112,34 +117,42 @@
 </clr-modal>
 
 <clr-modal [(clrModalOpen)]="finishOpen">
-  <h3 class="modal-title">Are you sure you want to terminate the Session for {{ username }}?</h3>
+  <h3 class="modal-title">
+    Are you sure you want to terminate the Session for {{ username }}?
+  </h3>
   <div class="modal-body">
     <p *ngIf="shouldKeepVmOnFinish; else no_course">
       The users VMs will be kept until they expire or the course is marked as
       "complete".
       <br />
-      Forcing the finish will immediately de-provision the users resources. Any VMs
-      that the user is using will be wiped.
+      Forcing the finish will immediately de-provision the users resources. Any
+      VMs that the user is using will be wiped.
     </p>
     <ng-template #no_course>
-      Finishing a scenario will immediately de-provision the users resources. Any VMs
-      that the user is using will be wiped.
+      Finishing a scenario will immediately de-provision the users resources.
+      Any VMs that the user is using will be wiped.
     </ng-template>
   </div>
   <div class="modal-footer">
     <button class="btn btn-outline" (click)="finishOpen = false">Cancel</button>
     <div *ngIf="shouldKeepVmOnFinish" style="display: inline-block">
-      <button class="btn btn-danger-outline" (click)="actuallyFinish(true)" *rbac="['sessions.update']">
+      <button
+        class="btn btn-danger-outline"
+        (click)="actuallyFinish(true)"
+        *rbac="['sessions.update']"
+      >
         Force
       </button>
     </div>
-    <button class="btn btn-danger-outline" (click)="actuallyFinish()" *rbac="['sessions.update']">
+    <button
+      class="btn btn-danger-outline"
+      (click)="actuallyFinish()"
+      *rbac="['sessions.update']"
+    >
       Terminate Session
     </button>
   </div>
 </clr-modal>
-
-
 
 <clr-modal
   #sessionExpiredModal

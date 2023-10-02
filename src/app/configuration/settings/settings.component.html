@@ -2,7 +2,9 @@
   <div class="clr-col">
     <h3>
       Settings
-      <span class="scope">{{ this.selectedScope?.displayName ?? "scope" }}</span>
+      <span class="scope">{{
+        this.selectedScope?.displayName ?? "scope"
+      }}</span>
     </h3>
   </div>
 </div>
@@ -25,7 +27,7 @@
       <span *ngIf="this.selectedScope">{{
         this.selectedScope.displayName
       }}</span>
-      <clr-icon shape="caret down"></clr-icon>
+      <cds-icon shape="angle" direction="down"></cds-icon>
     </button>
 
     <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
