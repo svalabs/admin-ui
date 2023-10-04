@@ -36,7 +36,6 @@
     "chartjs-plugin-datalabels": "^2.1.0",
     "core-js": "^2.6.11",
     "font-awesome": "^4.7.0",
-    "lodash-es": "^4.17.15",
     "marked": "^4.3.0",
     "moment": "^2.29.4",
     "ng2-charts": "^3.1.2",
