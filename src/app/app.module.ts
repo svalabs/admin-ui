@@ -139,6 +139,7 @@ import {
   buildingIcon,
   numberListIcon,
 } from '@cds/core/icon';
+import { DashboardDetailsComponent } from './dashboards/dashboard-details/dashboard-details.component';
 
 ClarityIcons.addIcons(
   plusIcon,
@@ -264,6 +265,7 @@ export function jwtOptionsFactory(): JwtConfig {
     TypedArrayStringComponent,
     TypedArrayNumberComponent,
     TypedArrayBooleanComponent,
+    DashboardDetailsComponent,
   ],
   imports: [
     BrowserModule,
