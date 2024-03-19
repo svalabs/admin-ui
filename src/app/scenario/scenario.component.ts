@@ -5,6 +5,8 @@ import { ClrDatagridSortOrder, ClrModal } from '@clr/angular';
 import { ServerResponse } from '../data/serverresponse';
 import { FilterScenariosComponent } from '../filter-scenarios/filter-scenarios.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { VMTasks } from '../data/vm-tasks';
+import { TaskComponent } from './task/task.component';
 import { ScenarioWizardComponent } from './scenario-wizard/scenario-wizard.component';
 import { RbacService } from '../data/rbac.service';
 

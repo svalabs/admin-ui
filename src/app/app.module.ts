@@ -94,6 +94,8 @@ import { TypedInputComponent } from './typed-form/typed-input.component';
 import { TypedInputFieldComponent } from './typed-form/typed-input-field.component';
 import { TypedSettingsService } from './data/typedSettings.service';
 import { OTACManagementComponent } from './event/otacmanagement/otacmanagement.component';
+import { TaskComponent } from './scenario/task/task.component';
+import { TaskFormComponent } from './scenario/task-form/task-form.component';
 import { TypedMapStringComponent } from './typed-form/typed-map-string.component';
 import { TypedMapNumberComponent } from './typed-form/typed-map-number.component';
 import { TypedMapBooleanComponent } from './typed-form/typed-map-boolean.component';
@@ -145,7 +147,9 @@ import {
   timesIcon,
   buildingIcon,
   numberListIcon,
+  syncIcon,
 } from '@cds/core/icon';
+import { SingleTaskVerificationMarkdownComponent } from './step/single-task-verification-markdown/single-task-verification-markdown.component';
 
 ClarityIcons.addIcons(
   plusIcon,
@@ -183,7 +187,8 @@ ClarityIcons.addIcons(
   clockIcon,
   timesIcon,
   buildingIcon,
-  numberListIcon
+  numberListIcon,
+  syncIcon
 );
 
 const appInitializerFn = (appConfig: AppConfigService) => {
@@ -266,6 +271,8 @@ export function jwtOptionsFactory(): JwtConfig {
     TypedInputFieldComponent,
     SettingsComponent,
     OTACManagementComponent,
+    TaskComponent,
+    TaskFormComponent,
     TypedMapStringComponent,
     TypedMapNumberComponent,
     TypedMapBooleanComponent,
@@ -277,6 +284,7 @@ export function jwtOptionsFactory(): JwtConfig {
     ScenarioDetailComponent,
     StepsScenarioComponent,
     DashboardDetailsComponent,
+    SingleTaskVerificationMarkdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -302,7 +310,10 @@ export function jwtOptionsFactory(): JwtConfig {
         sanitize: false,
         convertHTMLEntities: false,
       },
-      globalParsers: [{ component: CtrComponent }],
+      globalParsers: [
+        { component: CtrComponent },
+        { component: SingleTaskVerificationMarkdownComponent },
+      ],
     }),
     BrowserAnimationsModule,
     DragulaModule.forRoot(),

@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
 import { VirtualMachine as VM } from '../data/virtualmachine';
 import { CtrService } from '../data/ctr.service';
+import { Scenario } from '../data/scenario';
 
 // Replacement for lodash's escape
 const escape = (s: string) =>
@@ -115,6 +116,13 @@ ${token}`;
         filename="${filepath}"
         title="Click to create ${filepath} on ${target}"
       >${this.renderHighlightedCode(code, language, filename)}</ctr>`;
+    },
+    verifyTask(code: string, target: string, taskName: string) {
+      return `<app-single-task-verification-markdown
+        target="${target}" 
+        message="${code}" 
+        taskName="${taskName}"
+        ></app-single-task-verification-markdown>`;
     },
   };
 

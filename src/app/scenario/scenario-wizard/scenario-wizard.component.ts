@@ -18,6 +18,7 @@ import { KeepaliveValidator } from 'src/app/validators/keepalive.validator';
 import { StepsScenarioComponent } from '../steps-scenario/steps-scenario.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CategoryFormGroup, ScenarioFormGroup } from 'src/app/data/forms';
+import { VMTasks } from 'src/app/data/vm-tasks';
 
 @Component({
   selector: 'scenario-wizard',
@@ -384,6 +385,7 @@ export class ScenarioWizardComponent implements OnInit {
   addVMSet() {
     this.scenarioTainted = true;
     this.selectedscenario.virtualmachines.push({});
+    this.updateSelectedScenarioRef()
   }
   addVM() {
     this.scenarioHasVM(this.selectedscenario);
@@ -391,6 +393,7 @@ export class ScenarioWizardComponent implements OnInit {
     this.selectedscenario.virtualmachines[this.newvmindex][
       this.vmform.controls.vm_name.value
     ] = this.vmform.controls.vm_template.value;
+    this.updateSelectedScenarioRef()
     this.createVMModal.close();
   }
 
@@ -398,20 +401,27 @@ export class ScenarioWizardComponent implements OnInit {
     this.scenarioTainted = true;
     this.deletingVMSetIndex = i;
     this.deleteVMSetModal.open();
+    this.updateSelectedScenarioRef()
   }
 
   public deleteVM(setIndex: number, key: string) {
     this.scenarioTainted = true;
     delete this.selectedscenario.virtualmachines[setIndex][key];
+    this.updateSelectedScenarioRef()
   }
   doDeleteVMSet() {
     this.selectedscenario.virtualmachines.splice(this.deletingVMSetIndex, 1);
     this.deleteVMSetModal.close();
+    this.updateSelectedScenarioRef()
   }
   public openCreateVM(i: number) {
     this.vmform.reset();
     this.newvmindex = i;
     this.createVMModal.open();
+  }
+
+  updateSelectedScenarioRef() {
+    this.selectedscenario = {...this.selectedscenario} // Force an Update on Child Components using the selectedscenario as Input
   }
 
   refreshFilteredScenario() {
@@ -452,5 +462,10 @@ export class ScenarioWizardComponent implements OnInit {
         }
       });
     }
+  }
+
+  replaceVmTasks(vmTasks: VMTasks[]) {
+    this.selectedscenario.vm_tasks = vmTasks
+    this.scenarioTainted = true
   }
 }
