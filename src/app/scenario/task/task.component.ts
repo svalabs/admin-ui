@@ -61,7 +61,7 @@ export class TaskComponent {
       command: editTask?.command ?? '',
       expected_output_value: editTask?.expected_output_value ?? '',
       expected_return_code: editTask?.expected_return_code ?? '',
-      return_type: editTask?.return_type ?? 'Return Text'
+      return_type: editTask?.return_type ?? 'Return_Text'
     } as Task
   }
   

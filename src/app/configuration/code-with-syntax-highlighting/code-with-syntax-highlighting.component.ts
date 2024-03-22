@@ -12,12 +12,14 @@ import {
 import 'prismjs';
 import 'prismjs/components/prism-yaml';
 import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-regex';
 
 declare var Prism: any;
 
 export enum supportedLanguages { //To allow for more Languages the prism Components have to be imported also. For a list of all Supported Languages see: https://prismjs.com/#supported-languages
   YAML = 'language-yaml',
   BASH = 'language-bash',
+  REGEX = 'language-regex',
 }
 
 @Component({

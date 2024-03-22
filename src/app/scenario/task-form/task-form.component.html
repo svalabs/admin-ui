@@ -28,7 +28,7 @@
     >
   </clr-input-container>
 
-  <clr-control-container id="codeInput">
+  <clr-control-container class="codeInput">
     <label>Command</label>
     <app-code-with-syntax-highlighting
       [language]="supportedLanguages.BASH"
@@ -39,32 +39,6 @@
       (textChanged)="commandOutput($event)"
     ></app-code-with-syntax-highlighting>
   </clr-control-container>
-
-  <clr-textarea-container>
-    <label>Expected Output</label>
-    <textarea
-      clrTextarea
-      type="text"
-      formControlName="taskexpectedOutput"
-      required
-    ></textarea>
-    <clr-control-error *clrIfError="'required'"
-      >Expected Output is required</clr-control-error
-    >
-  </clr-textarea-container>
-
-  <clr-input-container>
-    <label>Expected Returncode</label>
-    <input
-      clrInput
-      type="number"
-      formControlName="taskExpectedReurncode"
-      required
-    />
-    <clr-control-error *clrIfError="'required'"
-      >Expected Returncode is required</clr-control-error
-    >
-  </clr-input-container>
 
   <clr-select-container>
     <label>Return Type</label>
@@ -78,9 +52,51 @@
         {{ returnType }}
       </option>
     </select>
-    <clr-control-helper>More info about the return Types</clr-control-helper>
+    <clr-control-helper>Depending on the Return Type, the verification either checks for the return code, plain text response from the system or matches that response with a given regular expression.</clr-control-helper>
     <clr-control-error *clrIfError="'required'"
       >Return Type is required</clr-control-error
     >
   </clr-select-container>
+
+  <clr-textarea-container *ngIf="isOfReturnType(['Return Text', 'Return Code and Text'])">
+    <label>Expected Output</label>
+    <textarea
+      clrTextarea
+      type="text"
+      formControlName="taskExpectedOutput"
+      required
+    ></textarea>
+    <clr-control-error *clrIfError="'required'"
+      >Expected Output is required</clr-control-error
+    >
+  </clr-textarea-container>
+  
+  <clr-control-container class="codeInput" *ngIf="isOfReturnType(['Match Regex'])">
+    <label>Regex to match</label>
+    <app-code-with-syntax-highlighting
+      [language]="supportedLanguages.REGEX"
+      [height]="'2rem'"
+      [width]="'90%'"
+      [outline]="'none'"
+      [textValue]="taskForm.controls.taskExpectedOutput.value"
+      (textChanged)="regexOutput($event)"
+    ></app-code-with-syntax-highlighting>
+    <clr-control-error *clrIfError="'required'"
+      >Expected Output is required</clr-control-error
+    >
+  </clr-control-container>
+
+  <clr-input-container *ngIf="isOfReturnType(['Return Code', 'Return Code and Text'])">
+    <label>Expected Returncode</label>
+    <input
+      clrInput
+      type="number"
+      formControlName="taskExpectedReurncode"
+      required
+    />
+    <clr-control-error *clrIfError="'required'"
+      >Expected Returncode is required</clr-control-error
+    >
+  </clr-input-container>
+  <p></p>
 </form>

@@ -31,6 +31,8 @@ export class TaskFormComponent implements OnInit {
 
   returnTypes = Object.values(ReturnType);
 
+  private previousReturnType: string = 'Return Text'
+
   taskForm: FormGroup;
 
   ngOnInit() {
@@ -45,7 +47,7 @@ export class TaskFormComponent implements OnInit {
       taskCommand: new FormControl(this.editTask.command, [
         Validators.required,
       ]),
-      taskexpectedOutput: new FormControl(
+      taskExpectedOutput: new FormControl(
         this.editTask.expected_output_value,
         [Validators.required]
       ),
@@ -61,25 +63,47 @@ export class TaskFormComponent implements OnInit {
       this.taskChanged.emit(this.buildEditTaskFromFormData())
       this.taskForm.updateValueAndValidity({emitEvent: false})
     });
+    this.previousReturnType = ReturnType[this.editTask.return_type as unknown as keyof typeof ReturnType] 
+    this.taskForm.controls.taskReturnType.valueChanges.subscribe((newValue) => {
+      if (this.previousReturnType == 'Match Regex' && newValue !== 'Match Regex') {
+        this.taskForm.controls.taskExpectedOutput.setValue('')
+      }
+      if (this.previousReturnType !== 'Match Regex' && newValue == 'Match Regex') {
+        this.taskForm.controls.taskExpectedOutput.setValue('')
+      }
+      if (newValue == "Return Code") {
+        this.taskForm.controls.taskExpectedOutput.setValue('')
+      }
+      this.previousReturnType = newValue
+    })
   }
 
   private buildEditTaskFromFormData(): EditTask {
     const rTypeString = this.taskForm.controls.taskReturnType.value
     const rTypeKey = Object.keys(ReturnType).find(key => ReturnType[key] == rTypeString) ?? "Return_Text"
+    const expectedReturnCode = this.taskForm.controls.taskExpectedReurncode.value == "" ? 0 : this.taskForm.controls.taskExpectedReurncode.value
     return {
       id: this.editTask.id,
       vmName: this.taskForm.controls.taskNode.value,
       name: this.taskForm.controls.taskName.value,
       description: this.taskForm.controls.taskDescription.value,
       command: this.taskForm.controls.taskCommand.value,
-      expected_output_value: this.taskForm.controls.taskexpectedOutput.value,
-      expected_return_code: this.taskForm.controls.taskExpectedReurncode.value,
+      expected_output_value: this.taskForm.controls.taskExpectedOutput.value,
+      expected_return_code: expectedReturnCode,
       return_type: rTypeKey,
     } as unknown as EditTask;
+  }
+
+  isOfReturnType(returnTypes: string[]): boolean {
+    return returnTypes.includes(this.taskForm.controls.taskReturnType.value);
   }
 
   commandOutput(command) {
     this.editTask.command = command
     this.taskForm.controls.taskCommand.setValue(command);
+  }
+
+  regexOutput(regex) {
+    this.taskForm.controls.taskExpectedOutput.setValue(regex);
   }
 }
