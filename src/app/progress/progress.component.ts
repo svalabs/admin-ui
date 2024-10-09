@@ -99,6 +99,7 @@ export class ProgressComponent {
   }
 
   public getUsername() {
+    console.log("getUsername in progressComponent Start")
     return this.hideUsername ? this.progress.user : this.progress.username;
   }
 }
