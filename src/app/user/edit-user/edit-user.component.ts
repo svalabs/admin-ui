@@ -34,7 +34,7 @@ export class EditUserComponent implements OnInit, OnChanges {
 
   @ViewChild('deleteconfirm') deleteConfirmModal: DeleteConfirmationComponent;
   @ViewChild('userDetails') userDetails: ElementRef;
-  @ViewChild('alert') alert: AlertComponent;
+  @ViewChild('alert', { static: true }) alert: AlertComponent;
 
   constructor(public userService: UserService) {}
 
