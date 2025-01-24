@@ -118,7 +118,7 @@ export class ScheduledeventService extends ListableResourceClient<ScheduledEvent
   }
 
   public delete(se: ScheduledEventBase) {
-    return this.garg.delete(`/${se.id}`).pipe(
+    return this.garg.delete(`/delete/${se.id}`).pipe(
       switchMap((s: ServerResponse) => {
         return from(s.message);
       }),
